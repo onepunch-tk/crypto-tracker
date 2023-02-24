@@ -6,6 +6,8 @@ export const GlobalStyle = createGlobalStyle`
    License: none (public domain)
 */
 
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap');
+
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -35,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     line-height: 1;
+    font-family: 'Source Sans Pro', sans-serif;
   }
 
   ol, ul {
