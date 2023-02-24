@@ -1,6 +1,11 @@
+import {Outlet} from "react-router-dom";
+
 function Coins() {
     return (
-        <div></div>
+        <>
+            <h1>coins</h1>
+            <Outlet/>
+        </>
     );
 }
 
