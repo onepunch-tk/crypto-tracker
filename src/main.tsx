@@ -8,8 +8,8 @@ import {router} from "./routes/Router";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <>
-        <GlobalStyle/>
         <ThemeProvider theme={theme}>
+            <GlobalStyle/>
             <RouterProvider router={router} />
         </ThemeProvider>
     </>
