@@ -6,7 +6,6 @@ export const GlobalStyle = createGlobalStyle`
    License: none (public domain)
 */
 
-  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap');
 
   * {
     box-sizing: border-box;

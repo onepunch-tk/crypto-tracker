@@ -4,7 +4,7 @@ function Coin() {
     const {coinId} = useParams();
     console.log(coinId);
     return (
-        <h1>Coin</h1>
+        <h1>Coin:{coinId}</h1>
     );
 }
 
