@@ -15,7 +15,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: "coins/:coinId",
-                element: <Coin/>
+                element: <Coin/>,
+                children:[
+                    {
+                        path:"chart"
+                    },
+                    {
+                        path: "price"
+                    }
+                ]
             }
         ]
     }
