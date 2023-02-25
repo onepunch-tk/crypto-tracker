@@ -4,7 +4,7 @@ import {GlobalStyle} from "./styles/reset-css";
 import {ThemeProvider} from "styled-components";
 import {theme} from "./styles/theme";
 import {RouterProvider} from 'react-router-dom';
-import {router} from "./routes/Router";
+import {router} from "./views/Router";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <>
