@@ -1,4 +1,4 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, Outlet, useNavigate, useParams} from "react-router-dom";
 import Header from "../components/Header";
 import {useEffect, useState} from "react";
 import {ICoinDetail, ICoinPrice} from "../../utils/coin-module";
@@ -28,26 +28,26 @@ const Description = styled.p`
 `;
 
 function Coin() {
-    const {state} = useLocation();
+    //delete
+    //const {state} = useLocation();
+    const {coinId} = useParams();
     const [detail, setDetail] = useState<ICoinDetail>();
     const [price, setPrice] = useState<ICoinPrice>();
     const navigate = useNavigate();
-
     useEffect(() => {
         (async () => {
-            if (!state) {
-                return navigate("/");
-            }
-            const detailResult = await (await fetch(`https://api.coinpaprika.com/v1/coins/${state.coin.id}`)).json();
+            // if (!state) {
+            //     return navigate("/");
+            // }
+            const detailResult = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
             setDetail(detailResult);
-            const priceResult = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${state.coin.id}`)).json();
+            const priceResult = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
             setPrice(priceResult);
         })();
     }, []);
     return (
         <>
-            <Header title={state?.coin.name ?? "Loading..."}/>
-
+            <Header title={detail?.name as string}/>
             <Overview>
                 <OverviewItem>
                     <span>Rank:</span>
@@ -65,7 +65,7 @@ function Coin() {
             <Description>{detail?.description}</Description>
             <Overview>
                 <OverviewItem>
-                    <span>Total Suply:</span>
+                    <span>Total Supply:</span>
                     <span>{price?.total_supply}</span>
                 </OverviewItem>
                 <OverviewItem>
@@ -73,6 +73,9 @@ function Coin() {
                     <span>{price?.max_supply}</span>
                 </OverviewItem>
             </Overview>
+            <Link to={"chart"}>Chart</Link>
+            <Link to={"price"}>Price</Link>
+            <Outlet />
         </>
     );
 }
