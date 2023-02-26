@@ -5,12 +5,19 @@ import {ThemeProvider} from "styled-components";
 import {theme} from "./styles/theme";
 import {RouterProvider} from 'react-router-dom';
 import {router} from "./views/Router";
+import {QueryClient, QueryClientProvider} from "react-query";
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <>
-        <ThemeProvider theme={theme}>
-            <GlobalStyle/>
-            <RouterProvider router={router} />
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+            <ThemeProvider theme={theme}>
+                <GlobalStyle/>
+                <RouterProvider router={router} />
+            </ThemeProvider>
+            <ReactQueryDevtools initialIsOpen={true}/>
+        </QueryClientProvider>
     </>
 )

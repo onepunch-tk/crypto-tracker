@@ -3,6 +3,8 @@ import styled from "styled-components";
 import {useEffect, useState} from "react";
 import {ICoin} from "../../utils/coin-module";
 import Header from "../components/Header";
+import {useQuery} from "react-query";
+import {fetchCoins} from "../../controllers/apis/coin-api";
 
 
 
@@ -38,24 +40,28 @@ const Loader = styled.span`
 `
 
 function Coins() {
-    const [coins, setCoins] = useState<ICoin[]>();
-    const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        (async () => {
-            const result = await (await fetch("https://api.coinpaprika.com/v1/coins")).json();
-            setCoins(result.slice(0, 100));
-            setIsLoading(false);
-        })();
-    }, []);
+    // const [coins, setCoins] = useState<ICoin[]>();
+    // const [isLoading, setIsLoading] = useState(true);
+    // useEffect(() => {
+    //     (async () => {
+    //         const response = await (await fetch("https://api.coinpaprika.com/v1/coins")).json();
+    //         setCoins(response.slice(0, 100));
+    //         setIsLoading(false);
+    //     })();
+    // }, []);
+
+    //use react-query
+    const {isLoading, data} = useQuery<ICoin[]>(["coins"],fetchCoins);
+
     return (
         <>
             <Header title={"Coins"}/>
             <CoinList>
                 {isLoading ? (<Loader>Loading...</Loader>) :
-                    (coins?.map(coin =>
+                    (data?.map(coin =>
                             <Coin key={coin.id}>
                                 <Link
-                                    to={`/coins/${coin.id}`}
+                                    to={`/${coin.id}`}
                                     state={{coin}}
                                 >
                                     <CoinIcon src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}/>

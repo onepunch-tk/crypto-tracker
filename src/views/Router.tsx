@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate} from "react-router-dom";
+import {createBrowserRouter, Navigate, Params, useParams} from "react-router-dom";
 import Root from "./Root";
 import Coins from "./screens/Coins";
 import Coin from "./screens/Coin";
@@ -16,13 +16,13 @@ export const router = createBrowserRouter([
 
             },
             {
-                path: "coins/:coinId",
+                path: ":coinId",
                 element: <Coin/>,
                 children: [
-                    {
-                        index:true,
-                        element: <Navigate to={"chart"}/>
-                    },
+                    // {
+                    //     index:true,
+                    //     element: <Navigate to={"chart"}/>
+                    // },
                     {
                         path: "chart",
                         element: <Chart/>
