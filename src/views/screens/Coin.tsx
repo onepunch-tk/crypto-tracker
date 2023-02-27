@@ -6,6 +6,7 @@ import styled from "styled-components";
 import {useQuery} from "react-query";
 import {fetchCoinDetail, fetchPrice} from "../../controllers/apis/coin-api";
 import Chart from "../components/Chart";
+import {Helmet} from "react-helmet";
 
 const Overview = styled.div`
   display: flex;
@@ -47,7 +48,8 @@ const Tab = styled.span<{ isActive: boolean }>`
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
-    props.isActive ? props.theme.accentColor : props.theme.textColor};
+          props.isActive ? props.theme.accentColor : props.theme.textColor};
+
   a {
     display: block;
   }
@@ -78,10 +80,22 @@ function Coin() {
     // }, []);
 
     //use react-query
-    const {data:detail} = useQuery<ICoinDetail>(["coins","detail",coinId], ()=>fetchCoinDetail(coinId as string));
-    const {data:price} = useQuery<ICoinPrice>(["coins","price",coinId], ()=>fetchPrice(coinId as string));
+    const {data: detail} = useQuery<ICoinDetail>(["coins", "detail", coinId], () => fetchCoinDetail(coinId as string));
+    const {data: price} = useQuery<ICoinPrice>(
+        ["coins", "price", coinId],
+        () => fetchPrice(coinId as string),
+        // {
+        //     refetchInterval:5000,
+        //     refetchIntervalInBackground:true
+        // }
+    );
     return (
         <>
+            <Helmet>
+                <title>
+                    {`Crypto Tracker - ${detail?.name as string}`}
+                </title>
+            </Helmet>
             <Header title={detail?.name as string}/>
             <Link to={"/"}>Back Coins View &larr;</Link>
             <Overview>
@@ -94,8 +108,8 @@ function Coin() {
                     <span>${detail?.symbol}</span>
                 </OverviewItem>
                 <OverviewItem>
-                    <span>Open Source:</span>
-                    <span>{detail?.open_source ? "Yes" : "No"}</span>
+                    <span>Price:</span>
+                    <span>{`$ ${price?.quotes.USD.price.toFixed(2)}`}</span>
                 </OverviewItem>
             </Overview>
             <Description>{detail?.description}</Description>

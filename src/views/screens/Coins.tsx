@@ -5,6 +5,7 @@ import {ICoin} from "../../utils/coin-module";
 import Header from "../components/Header";
 import {useQuery} from "react-query";
 import {fetchCoins} from "../../controllers/apis/coin-api";
+import {Helmet} from "react-helmet";
 
 
 
@@ -55,6 +56,11 @@ function Coins() {
 
     return (
         <>
+            <Helmet>
+                <title>
+                    {`Crypto Tracker - Home`}
+                </title>
+            </Helmet>
             <Header title={"Coins"}/>
             <CoinList>
                 {isLoading ? (<Loader>Loading...</Loader>) :
