@@ -56,12 +56,13 @@ export interface ICoinPrice extends ICoin {
 }
 
 export interface IChart {
-    time_open:number
-    time_close:number
-    open:string
-    high:string
-    low:string
-    close:string
-    volume:string
-    market_cap:number
+    time_open:number;
+    time_close:number;
+    open:string;
+    high:string;
+    low:string;
+    close:string;
+    volume:string;
+    market_cap:number;
+    error?:string;
 }
